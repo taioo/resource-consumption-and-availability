@@ -23,6 +23,10 @@ var Treemap = (function () {
                 "heatmap": ["blue", "yellow", "red"],
                 "value": "value"
             })
+            .mouse({                
+                "move": false,                        // key will also take custom function
+                "click": function(){alert("Click!")}   
+              })       
             .draw()
         // finally, draw the visualization!
     }

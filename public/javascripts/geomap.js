@@ -24,6 +24,10 @@ var Geomap = (function () {
                 "heatmap": ["blue", "yellow", "red"],
                 "value": "value"
             })
+            .mouse({                
+                "move": false,                        // key will also take custom function
+                "click": function(){alert("Click!")}   
+              })       
             .tooltip("value")         // keys to place in tooltip
             .draw();
         // finally, draw the visualization!
