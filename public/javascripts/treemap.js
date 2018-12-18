@@ -3,7 +3,7 @@ var Treemap = (function () {
     // Konstruktor
     var Treemap = function (divId) {
         this.divId = divId;
-        this.sample_data = [
+        this.sample_data = [    //country Geographical Names
             { "value": 10, "country": "nausa", "name": "United States" },
             { "value": 15, "country": "aschn", "name": "China" },
             { "value": 2, "country": "euesp", "name": "Spain" },
