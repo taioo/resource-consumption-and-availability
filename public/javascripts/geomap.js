@@ -21,7 +21,7 @@ var Geomap = (function () {
             .id("country")            // key for which our data is unique on
             .text("name")             // key to use for display text
             .color({
-                "heatmap": ["white", "yellow", "red"],
+                "heatmap": ["blue", "yellow", "red"],
                 "value": "value"
             })
             .tooltip("value")         // keys to place in tooltip

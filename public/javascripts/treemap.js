@@ -20,7 +20,7 @@ var Treemap = (function () {
             .id("name")
             .size("value")
             .color({
-                "heatmap": ["white", "yellow", "red"],
+                "heatmap": ["blue", "yellow", "red"],
                 "value": "value"
             })
             .draw()
