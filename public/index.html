@@ -1,0 +1,30 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<!-- load D3js -->
+<script src="https://d3plus.org/js/d3.js"></script>
+
+<!-- load topojson library -->
+<script src="https://d3plus.org/js/topojson.js"></script>
+
+<!-- load D3plus after D3js -->
+<script src="https://d3plus.org/js/d3plus.js"></script>
+
+<!-- create container element for visualization -->
+
+<div id="geomap"></div>
+<div id="treemap"></div>
+
+
+
+<script src="./javascripts/geomap.js"></script>
+<script src="./javascripts/treemap.js"></script>
+
+
+<script>
+  var geomap = new Geomap('geomap')
+  geomap.render();
+
+  var treemap = new Treemap('treemap')
+  treemap.render();
+</script>
