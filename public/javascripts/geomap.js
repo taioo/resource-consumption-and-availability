@@ -4,10 +4,10 @@ var Geomap = (function () {
     var Geomap = function (divId) {
         this.divId = divId;
         this.sample_data = [
-            { "value": 2315987123, "country": "nausa", "name": "United States" },
-            { "value": 38157121349, "country": "aschn", "name": "China" },
-            { "value": 21891735098, "country": "euesp", "name": "Spain" },
-            { "value": 9807134982, "country": "sabra", "name": "Brazil" }
+            { "value": 10, "country": "nausa", "name": "United States" },
+            { "value": 15, "country": "aschn", "name": "China" },
+            { "value": 2, "country": "euesp", "name": "Spain" },
+            { "value": 3, "country": "sabra", "name": "Brazil" }
         ];
     };
 
@@ -20,7 +20,10 @@ var Geomap = (function () {
             .type("geo_map")          // visualization type
             .id("country")            // key for which our data is unique on
             .text("name")             // key to use for display text
-            .color("value")           // key for coloring countries
+            .color({
+                "heatmap": ["white", "yellow", "red"],
+                "value": "value"
+            })
             .tooltip("value")         // keys to place in tooltip
             .draw();
         // finally, draw the visualization!

@@ -4,12 +4,10 @@ var Treemap = (function () {
     var Treemap = function (divId) {
         this.divId = divId;
         this.sample_data = [
-            { "value": 100, "name": "alpha", "growth": .9 },
-            { "value": 70, "name": "beta", "growth": .4 },
-            { "value": 40, "name": "gamma", "growth": -.3 },
-            { "value": 15, "name": "delta", "growth": -.65 },
-            { "value": 5, "name": "epsilon", "growth": .7 },
-            { "value": 1, "name": "zeta", "growth": .2 }
+            { "value": 10, "country": "nausa", "name": "United States" },
+            { "value": 15, "country": "aschn", "name": "China" },
+            { "value": 2, "country": "euesp", "name": "Spain" },
+            { "value": 3, "country": "sabra", "name": "Brazil" }
         ];
     };
 
@@ -22,8 +20,8 @@ var Treemap = (function () {
             .id("name")
             .size("value")
             .color({
-                "range": ["white", "yellow", "red"],
-                "value": "growth"
+                "heatmap": ["white", "yellow", "red"],
+                "value": "value"
             })
             .draw()
         // finally, draw the visualization!
