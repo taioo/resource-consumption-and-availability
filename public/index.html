@@ -1,30 +1,16 @@
-<!doctype html>
-<meta charset="utf-8">
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/maps.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/usaAlbersLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<style src="./stylesheets/style.css"></style>
 
-<!-- load D3js -->
-<script src="https://d3plus.org/js/d3.js"></script>
 
-<!-- load topojson library -->
-<script src="https://d3plus.org/js/topojson.js"></script>
 
-<!-- load D3plus after D3js -->
-<script src="https://d3plus.org/js/d3plus.js"></script>
-
-<!-- create container element for visualization -->
-
-<div id="geomap"></div>
+<div id="chartGaps"></div>
 <div id="treemap"></div>
+<div id="geomap"></div>	
 
-
-
-<script src="./javascripts/geomap.js"></script>
+<script src="./javascripts/chartGaps.js"></script>
 <script src="./javascripts/treemap.js"></script>
-
-
-<script>
-  var geomap = new Geomap('geomap')
-  geomap.render();
-
-  var treemap = new Treemap('treemap')
-  treemap.render();
-</script>
+<script src="./javascripts/geomap.js"></script>
