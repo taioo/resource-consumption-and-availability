@@ -1,17 +1,36 @@
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/maps.js"></script>
-<script src="https://www.amcharts.com/lib/4/geodata/usaAlbersLow.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Treemap</title>
+  </head>
+  <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+            Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        #chartdiv {
+        width: 45%;
+        height: 98vh;
+        float: left;
+        }
 
-<style src="./stylesheets/style.css"></style>
-
-
-<div id="treemap"></div>
-<div id="geomap"></div>
-<div id="rangeAreaChart"></div>
-
-
-<script src="./javascripts/treemap.js"></script>
-<script src="./javascripts/geomap.js"></script>
-<script src="./javascripts/rangeAreaChart.js"></script>
+        #chartdiv1 {
+        width: 45%;
+        height: 98vh;
+        float: right;
+        }
+  </style>
+  <body>
+      
+     <div id="chartdiv"></div>
+     <div id="chartdiv1"></div>
+     
+     <script src="https://code.jquery.com/jquery-latest.js"></script>
+     <script src="https://www.amcharts.com/lib/4/core.js"></script>
+     <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+     <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+     <script src="./javascripts/chart.js"></script>
+  </body>
+</html>
