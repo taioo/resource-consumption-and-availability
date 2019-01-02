@@ -1,8 +1,14 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-a {
-  color: #00B7FF;
+#chartGaps {
+  width: 50%;
+  height: 50%;
+}
+
+
+#chartdiv {
+  width: 100%;
+  height: 500px;
 }
