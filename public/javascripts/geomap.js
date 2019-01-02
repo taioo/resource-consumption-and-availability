@@ -125,7 +125,6 @@ maleChart.data = JSON.parse(JSON.stringify(usData));
 var maleCategoryAxis = maleChart.yAxes.push(new am4charts.CategoryAxis());
 maleCategoryAxis.dataFields.category = "age";
 maleCategoryAxis.renderer.grid.template.location = 0;
-//maleCategoryAxis.renderer.inversed = true;
 maleCategoryAxis.renderer.minGridDistance = 15;
 
 var maleValueAxis = maleChart.xAxes.push(new am4charts.ValueAxis());
@@ -248,6 +247,18 @@ label.horizontalCenter = "middle";
 label.y = 50;
 label.showOnInit = true;
 label.text = "US Population pyramid";
+label.hiddenState.properties.dy = -100;
+
+
+
+
+
+var label = mainContainer.createChild(am4core.Label);
+label.isMeasured = false;
+label.x = 50;
+label.y = 10;
+label.showOnInit = true;
+label.text = "test Population pyramid";
 label.hiddenState.properties.dy = -100;
 
 var stateData = {
@@ -5197,5 +5208,8 @@ var stateData = {
       "male": 3395,
       "female": 5797
     }
-  ]
+  ],
+
+  // And, for a good measure, let's add a legend
+  "legend": {}
 }
