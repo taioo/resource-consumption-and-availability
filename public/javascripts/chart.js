@@ -1,5 +1,9 @@
 am4core.useTheme(am4themes_animated);
 
+var container = am4core.create("chartdiv", am4core.Container);
+container.width = am4core.percent(100);
+container.height = am4core.percent(100);
+
 const formatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2
 })
@@ -9,8 +13,8 @@ $.ajaxSetup({
 });
 
 var data = []
-$.getJSON("./data/dataFinal.json", function(json) {
-    data = json;
+$.getJSON("./data/dataFinal.json", function (json) {
+  data = json;
 });
 console.log(data)
 
@@ -21,26 +25,31 @@ function processData(data) {
 
   for (var country in data) {
     if (data[country]['year'] == 2014) {
-    var countryData = { name: data[country]['Country Name'], children: [] };
+      var countryData = { name: data[country]['Country Name'], children: [] };
 
-    for (var kfigure in data[country]) {
+      for (var kfigure in data[country]) {
 
-      if (kfigure == "Built-up Land_FT" || kfigure == "Cropland_FT"
+        if (kfigure == "Built-up Land_FT" || kfigure == "Cropland_FT"
           || kfigure == "Forest Products_FT" || kfigure == "Carbon_FT"
           || kfigure == "Fishing Grounds_FT" || kfigure == "Grazing Land_FT") {
           var value = data[country][kfigure].toString().replace(',', '.')
           countryData.children.push({ name: kfigure, count: parseFloat(value).toFixed(2) })
+        }
       }
-    }
 
-    treeData.push(countryData)
-  }}
+      treeData.push(countryData)
+    }
+  }
   return treeData;
 }
 
 // create chart
-var chart = am4core.create("chartdiv", am4charts.TreeMap);
+var chart = container.createChild(am4charts.TreeMap);
 chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+chart.width = am4core.percent(50);
+chart.height = am4core.percent(50);
+chart.align = "left";
+
 
 chart.padding(0, 0, 0, 0);
 chart.data = processData(data);
@@ -116,28 +125,32 @@ function processBiocap(data) {
 
   for (var country in data) {
     if (data[country]['year'] == 2014) {
-    var countryData = { name: data[country]['Country Name'], children: [] };
+      var countryData = { name: data[country]['Country Name'], children: [] };
 
-    for (var kfigure in data[country]) {
+      for (var kfigure in data[country]) {
 
-      if (kfigure == "Built-up Land_BT" || kfigure == "Cropland_BT"
+        if (kfigure == "Built-up Land_BT" || kfigure == "Cropland_BT"
           || kfigure == "Forest Products_BT" || kfigure == "Carbon_BT"
           || kfigure == "Fishing Grounds_BT" || kfigure == "Grazing Land_BT") {
           var value = data[country][kfigure].toString().replace(',', '.')
           countryData.children.push({ name: kfigure, count: parseFloat(value).toFixed(2) })
+        }
       }
-    }
 
-    treeData.push(countryData)
-  }}
+      treeData.push(countryData)
+    }
+  }
   return treeData;
 }
 
 // create chart
-var chart1 = am4core.create("chartdiv1", am4charts.TreeMap);
+var chart1 = container.createChild(am4charts.TreeMap);
 chart1.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+chart1.align = "right";
+chart1.width = am4core.percent(50);
+chart1.height = am4core.percent(50);
 
-chart1.padding(0, 0, 0, 0);
+
 chart1.data = processBiocap(data);
 // only one level visible initially
 chart1.maxLevels = 1;
@@ -185,3 +198,69 @@ bullet1.locationY = 0.5;
 bullet1.label.text = "{name}";
 bullet1.label.fill = am4core.color("#ffffff");
 level1SeriesTemplate.columns.template.fillOpacity = 0;
+
+chart.events.on("hit", function (ev) {
+  var zoom = chart.currentlyZoomed;
+  console.log("clicked on ", chart.currentlyZoomed.name);
+  
+}, this);
+
+chart1.events.on("hit", function (ev) {
+  console.log("clicked on ", chart1.currentlyZoomed.name);
+}, this);
+
+
+
+var chart2= container.createChild(am4charts.XYChart);
+
+chart2.height = am4core.percent(50);
+chart2.valign = "bottom";
+chart2.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+var data = [];
+var open = 100;
+var close = 250;
+
+for (var i = 1; i < 120; i++) {
+  open += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 4);
+  close = Math.round(open + Math.random() * 5 + i / 5 - (Math.random() < 0.5 ? 1 : -1) * Math.random() * 2);
+  data.push({ date: new Date(2018, 0, i), open: open, close: close });
+}
+
+chart2.data = data;
+
+var dateAxis = chart2.xAxes.push(new am4charts.DateAxis());
+
+var valueAxis = chart2.yAxes.push(new am4charts.ValueAxis());
+valueAxis.tooltip.disabled = true;
+
+var series = chart2.series.push(new am4charts.LineSeries());
+series.dataFields.dateX = "date";
+series.dataFields.openValueY = "open";
+series.dataFields.valueY = "close";
+series.tooltipText = "open: {openValueY.value} close: {valueY.value}";
+series.sequencedInterpolation = true;
+series.fillOpacity = 0.3;
+series.defaultState.transitionDuration = 1000;
+series.tensionX = 0.8;
+
+var series2 = chart2.series.push(new am4charts.LineSeries());
+series2.dataFields.dateX = "date";
+series2.dataFields.valueY = "open";
+series2.sequencedInterpolation = true;
+series2.defaultState.transitionDuration = 1500;
+series2.stroke = chart2.colors.getIndex(6);
+series2.tensionX = 0.8;
+
+chart2.cursor = new am4charts.XYCursor();
+chart2.cursor.xAxis = dateAxis;
+chart2.scrollbarX = new am4core.Scrollbar();
+
+
+chart2.legend = new am4charts.Legend();
+chart2.legend.useDefaultMarker = true;
+var marker = chart2.legend.markers.template.children.getIndex(0);
+marker.cornerRadius(12, 12, 12, 12);
+marker.strokeWidth = 2;
+marker.strokeOpacity = 1;
+marker.stroke = am4core.color("#ccc");
