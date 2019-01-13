@@ -177,7 +177,7 @@ bullet.label.fill = am4core.color("#ffffff");
 
 
 // by default only current level series bullets are visible, but as we need brand bullets to be visible all the time, we modify it's hidden state
-// level0SeriesTemplate.bulletsContainer.hiddenState.properties.opacity = 1;
+//level0SeriesTemplate.bulletsContainer.hiddenState.properties.opacity = 1;
 // level0SeriesTemplate.bulletsContainer.hiddenState.properties.visible = true;
 
 // create hover state
@@ -200,13 +200,13 @@ bullet1.label.fill = am4core.color("#ffffff");
 level1SeriesTemplate.columns.template.fillOpacity = 0;
 
 chart.events.on("hit", function (ev) {
+  setTimeout(() => console.log("clicked on ", chart.currentlyZoomed.name), 500);
   var zoom = chart.currentlyZoomed;
-  console.log("clicked on ", chart.currentlyZoomed.name);
-  
+  //console.log("clicked on ", chart.currentlyZoomed.name);  
 }, this);
 
 chart1.events.on("hit", function (ev) {
-  console.log("clicked on ", chart1.currentlyZoomed.name);
+  setTimeout(() => console.log("clicked on ", chart1.currentlyZoomed.name), 500);
 }, this);
 
 
@@ -218,8 +218,8 @@ chart2.valign = "bottom";
 chart2.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
 var data = [];
-var open = 100;
-var close = 250;
+var open = -100;
+var close = 100;
 
 for (var i = 1; i < 120; i++) {
   open += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 4);
