@@ -23,6 +23,26 @@ export function bioTreemap(container, data) {
     return chart1;
 }
 
+export function bioCountryTreemap(container) {
+
+    var chart = container.createChild(am4charts.TreeMap);
+    chart.hiddenState.properties.opacity = 0;
+    chart.align = "right";
+    chart.minGridDistance = 100;
+    chart.width = am4core.percent(50);
+    chart.height = am4core.percent(50);
+    chart.homeText = "Biocapacity";
+    chart.dataFields.color = "color";
+    
+    /* Define data fields */
+    chart.dataFields.value = "count";
+    chart.dataFields.name = "name";
+
+    chart.navigationBar = navbarTreemap(chart);
+    
+    return chart;
+}
+
 export function ecoTreemap(container, data) {
     var chart = container.createChild(am4charts.TreeMap);
     chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
