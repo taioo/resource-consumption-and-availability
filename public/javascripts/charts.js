@@ -14,6 +14,7 @@ export function bioTreemap(container, data) {
     chart1.maxLevels = 1;
     chart1.dataFields.value = "count";
     chart1.dataFields.name = "name";
+    chart1.dataFields.color = "color";
     chart1.dataFields.children = "children";
     chart1.homeText = "Biocapacity";
     chart1.navigationBar = navbarTreemap(chart1);
@@ -33,6 +34,7 @@ export function ecoTreemap(container, data) {
     chart.maxLevels = 1;
     chart.dataFields.value = "count";
     chart.dataFields.name = "name";
+    chart.dataFields.color = "color";
     chart.dataFields.children = "children";
     chart.homeText = "Ecological Footprint";
     chart.navigationBar = navbarTreemap(chart);
@@ -41,14 +43,14 @@ export function ecoTreemap(container, data) {
     return chart;
 }
 
-export function timeDateAxis(container, data) {
+export function timeDateAxis(container, data, country) {
 
     var chart2 = container.createChild(am4charts.XYChart);
 
     chart2.height = am4core.percent(50);
     chart2.valign = "bottom";
     chart2.hiddenState.properties.opacity = 0; // this creates initial fade-in
-    chart2.data = processTimeAll(data)
+    chart2.data = processTimeAll(data, country);
 
     var dateAxis = chart2.xAxes.push(new am4charts.DateAxis());
     var valueAxis = chart2.yAxes.push(new am4charts.ValueAxis());
@@ -62,7 +64,7 @@ export function timeDateAxis(container, data) {
     chart2.cursor = axisCursor(chart2, dateAxis);
 
     chart2.legend = chartLegend(chart2)
-
+    return chart2;
 }
 
 function seriesChartClose(chart2) {
@@ -71,8 +73,13 @@ function seriesChartClose(chart2) {
     series2.dataFields.valueY = "open";
     series2.sequencedInterpolation = true;
     series2.defaultState.transitionDuration = 1500;
-    series2.stroke = chart2.colors.getIndex(6);
+    series2.stroke = "#228B22";
     series2.tensionX = 0.8;
+
+    series2.tooltipText = "Bio: {valueY.value}";
+    series2.fill = am4core.color("#228B22");
+    series2.fillOpacity = 0.3;
+
     return series2
 }
 
@@ -81,11 +88,15 @@ function seriesChartOpen(chart2) {
     series.dataFields.dateX = "date";
     series.dataFields.openValueY = "open";
     series.dataFields.valueY = "close";
-    series.tooltipText = "open: {openValueY.value} close: {valueY.value}";
+    series.tooltipText = "Eco: {valueY.value}";
     series.sequencedInterpolation = true;
+    series.stroke = "#DC143C";
     series.fillOpacity = 0.3;
     series.defaultState.transitionDuration = 1000;
     series.tensionX = 0.8;
+
+    series.fill = am4core.color("#DC143C");
+    series.fillOpacity = 0.3;
 
     return series;
 }

@@ -1,3 +1,4 @@
+
 export function processData(data) {
     var treeData = [];
 
@@ -5,7 +6,7 @@ export function processData(data) {
 
     for (var country in data) {
         if (data[country]['year'] == 2014) {
-            var countryData = { name: data[country]['Country Name'], children: [] };
+            var countryData = { name: data[country]['Country Name'] ,color: "#DC143C" , children: [] };
 
             for (var kfigure in data[country]) {
 
@@ -29,6 +30,31 @@ export function processBiocap(data) {
 
     for (var country in data) {
         if (data[country]['year'] == 2014) {
+            var countryData = { name: data[country]['Country Name'],color: "#228B22", children: [] };
+
+            for (var kfigure in data[country]) {
+
+                if (kfigure == "Built-up Land_BT" || kfigure == "Cropland_BT"
+                    || kfigure == "Forest Products_BT" || kfigure == "Carbon_BT"
+                    || kfigure == "Fishing Grounds_BT" || kfigure == "Grazing Land_BT") {
+                    var value = data[country][kfigure].toString().replace(',', '.')
+                    countryData.children.push({ name: kfigure, count: parseFloat(value).toFixed(2) })
+                }
+            }
+            
+            treeData.push(countryData)
+        }
+    }
+    return treeData;
+}
+export function showCountryBiocap(data , country) {
+    country ='China'
+    var treeData = [];
+
+    // var smallBrands = { name: "Other", children: [] };
+
+    for (var country in data) {
+        if (data[country]['year'] == 2014) {
             var countryData = { name: data[country]['Country Name'], children: [] };
 
             for (var kfigure in data[country]) {
@@ -46,18 +72,73 @@ export function processBiocap(data) {
     }
     return treeData;
 }
-export function processTimeAll(data) {
-    var data = [];
-    var open = -100;
-    var close = 100;
+export function processTimeAll(data, country) {
 
-    for (var i = 1; i < 120; i++) {
-        open += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 4);
-        close = Math.round(open + Math.random() * 5 + i / 5 - (Math.random() < 0.5 ? 1 : -1) * Math.random() * 2);
-        data.push({ date: new Date(2018, 0, i), open: open, close: close });
+    var dataAxsis = [];
+    var up = 0;
+    var down = 0;
+    var date = new Date(0, 0, 0);
+
+
+    var countryData = data.filter(function (element) {
+        return element['Country Name'] == country;
+    });
+
+    if (countryData.length > 0) {
+
+        countryData.forEach(function (found) {
+            var year = found['year']+1;
+            date = new Date(year, 0, 0);
+            up = Number(found['Forest Products_BT'])
+                + Number(found['Grazing Land_BT'])
+                + Number(found['Cropland_BT'])
+                + Number(found['Fishing Grounds_BT'])
+                + Number(found['Built-up Land_BT'])
+            down = Number(found['Built-up Land_FT'])
+                + Number(found['Carbon_FT'])
+                + Number(found['Cropland_FT'])
+                + Number(found['Forest Products_FT'])
+                + Number(found['Grazing Land_FT'])
+            console.log(found)
+            console.log(date)
+            console.log(up)
+            console.log(down)
+            dataAxsis.push({ date: date, open: up, close: down });
+        });
+    } else {
+
+        //data = _.orderBy(data, ['year'], ['asc']);
+        
+        // [...years.keys()].forEach(year => {
+        //     data.forEach(function (found) {
+        //         var year = found['year'];
+        //         if (year) {
+        //             date = new Date(year, 0, 0);
+        //             up = Number(found['Forest Products_BT'])
+        //                 + Number(found['Grazing Land_BT'])
+        //                 + Number(found['Cropland_BT'])
+        //                 + Number(found['Fishing Grounds_BT'])
+        //                 + Number(found['Built-up Land_BT'])
+        //             down = Number(found['Built-up Land_FT'])
+        //                 + Number(found['Carbon_FT'])
+        //                 + Number(found['Cropland_FT'])
+        //                 + Number(found['Forest Products_FT'])
+        //                 + Number(found['Grazing Land_FT'])
+        //             console.log(found)
+        //             console.log(date)
+        //             console.log(up)
+        //             console.log(down)
+        //         }
+                
+        //            dataAxsis.push({ date: date, open: up, close: down });
+        //     });
+        // });
+
     }
 
-    return data;
+
+
+    return dataAxsis;
 }
 
 export function navbarTreemap(chart) {
