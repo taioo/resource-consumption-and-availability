@@ -58,7 +58,7 @@ chart.events.on("hit", function (ev) {
 
       chartCountry.data = processBiocap(data, chart.currentlyZoomed.name);
 
-      
+
 
 
       // chartCountry.data = [{
