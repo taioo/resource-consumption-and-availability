@@ -7,7 +7,7 @@
 http://localhost:3000/
 
 
-![GIF](/Screenshots/GDV/Screenshots/AxesZoom.png)
+![GIF](/Screenshots/AxesZoom.png)
 ![GIF](/Screenshots/selectAxesZoom.png)
 ![GIF](/Screenshots/select china.png)
 ![GIF](/Screenshots/AxesZoom.png)
