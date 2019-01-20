@@ -12,5 +12,7 @@ http://localhost:3000/
 ![](/Screenshots/AxesZoom.png)
 ![](/Screenshots/selectChina.png)
 
+![](/Screenshots/screen.gif)
+
 
 ![GIF](/Screenshots/star.gif)
